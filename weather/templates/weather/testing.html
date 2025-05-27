@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Weather perhaps</title>
+        <style>
+            div#aa{
+                position: absolute;
+                background: rgb(158, 158, 158);
+
+                /*border*/
+                width: 500px;
+                height: 300px;
+                border-radius: 15px;
+                animation: moving 0.6s infinite;
+            }
+            div#rainbow{
+                display: inline;
+                animation: rgb 0.2s infinite;
+            }
+            @keyframes moving {
+                0%, 100% {
+                top: 550px; left: 1000px;
+                animation-timing-function: ease-in;
+                }
+
+                50% {
+                top: 560px; left: 1000px;
+                animation-timing-function: ease-out;
+                }
+            }
+            @keyframes rgb {
+                0%{
+                    color: red;
+                }
+                30%{
+                    color: green;
+                }
+                60%{
+                    color: blue;
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+        <h2>to the <div id="rainbow">testing</div> space</h2>
+        <hr>
+        <p>hi</p>
+        <pre>this is normal / <b>this is bold</b></pre>
+        <img src="{% static 'images/bread.jpg'%}" alt="there is no image">
+        <img src="{% static 'images/huh.gif'%}" alt="car">
+        <p style="background-color: blue; color: aliceblue; text-align: center; font-size: 250%;">this is blue</p>  
+        <div id="aa">
+            <br>
+            <a href="https://www.tcpschool.com/html/html_basic_links">i refered these for making frontend</a>
+            <br><br>
+            <a href="">main page</a>
+        </div>
+        <ul style="list-style-type: square;">
+            <strong><mark>breads</mark></strong>
+            <li>loaf</li>
+            <li>garlic bread</li>
+            <li>baguette</li>
+        </ul>
+        <ul>
+            {% for A in number %}
+            <p>{{ A }}</p>
+            {% endfor %}
+        </ul>
+        <p>
+            {{ time }}
+        </p>
+    </body>
+</html>
