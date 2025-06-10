@@ -19,9 +19,6 @@ def testing(request):
 def Weather(request):
     return render(request, "weather/Main.html")
 
-def slider(request):
-    return render(request, "weather/new.html")
-
 
 # blog html
 

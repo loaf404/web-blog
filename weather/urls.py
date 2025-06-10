@@ -7,7 +7,6 @@ urlpatterns = [
     path('hello/', views.Nothing),
     path('test/', views.testing),
     path('weatherM/', views.Weather),
-    path('slider/', views.slider),
     #blog url path
     path('contact/', views.contact, name='contact'),
     path('index/', views.index, name='index'),
