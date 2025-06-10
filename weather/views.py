@@ -37,6 +37,12 @@ def projects(request):
 def resume(request):
     return render(request, "weather/resume.html")
 
+def board(request):
+    return render(request, "weather/board.html")
+
+def index_c(request):
+    return render(request, "weather/index-c.html")
+
 
 
 # To run the server, write down "python manage.py runserver"
