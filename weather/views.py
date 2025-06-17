@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Board
 from django.http import HttpResponse
 import time
 # Create your views here.
@@ -35,7 +36,15 @@ def resume(request):
     return render(request, "weather/resume.html")
 
 def board(request):
-    return render(request, "weather/board.html")
+    boards = Board.objects.all()
+    if request.method == "POST":
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        if title and content:
+            new_board = Board(title=title, content=content)
+            new_board.save()
+            return redirect('board')
+    return render(request, "weather/board.html", {'boards': boards})
 
 def index_c(request):
     return render(request, "weather/index-c.html")
