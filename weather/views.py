@@ -1,25 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Board
-from django.http import HttpResponse
-import time
 # Create your views here.
-
-def say_hello(request):
-    return render(request, "weather/hello.html")
-
-def Nothing(request):
-    return HttpResponse("Testing")
-
-def testing(request):
-    Loantime = time.time()
-    Rt = time.localtime(Loantime)
-    FormattedRt = time.strftime("%Y년 %m월 %d일 %H시 %M분 %S초", Rt)
-    number = range(1,11)
-    return render(request, "weather/testing.html", {'time': FormattedRt, 'number': number})
-
-def Weather(request):
-    return render(request, "weather/Main.html")
-
 
 # blog html
 
@@ -45,9 +26,6 @@ def board(request):
             new_board.save()
             return redirect('board')
     return render(request, "weather/board.html", {'boards': boards})
-
-def index_c(request):
-    return render(request, "weather/index-c.html")
 
 
 
