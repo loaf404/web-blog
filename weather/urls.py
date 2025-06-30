@@ -4,6 +4,7 @@ from . import views
 # URLConf
 urlpatterns = [
     path('', views.index, name='index'),
+    path('slider/', views.Slider, name='slider'),
     #blog url path
     path('contact/', views.contact, name='contact'),
     path('index/', views.index, name='index'),

@@ -17,8 +17,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'src/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'src/css/Board.css' %}" rel="stylesheet" />
     </head>
-    <body class="d-flex flex-column">
+    <body class="d-flex flex-column bg-light">
         <main class="flex-shrink-0">
             <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
@@ -37,9 +38,8 @@
             </nav>
             <!-- Page content -->
             <section class="py-5">
-                <div class="container px-5">
+                <div class="container px-5 mb-5">
                     <!-- Board -->
-                    <div class="bg-light rounded-4 py-5 px-4 px-md-5">
                         <div class="text-center mb-5">
                             <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Board</span></h1>
                         </div>
@@ -49,24 +49,28 @@
                                     <div class="card-body p-0">
                                         <div class="d-flex">
                                             <div class="px-4">
-                                                <h2 class="fw-bolder p-4 mb-0">Write content here</h2>
+                                                <h2 class="fw-bolder p-4 mb-0">Content here</h2>
                                             </div>
                                         </div>
-                                        <div class="px-4 mb-4">
+                                        <div class="px-4 mb-3">
                                             <form method="post" action="{% url 'board' %}">
                                                 {% csrf_token %}
-                                                <div class="bg-light p-4 rounded-4 mb-2">
+                                                <div class="bg-light p-4 rounded-4 mb-3">
                                                     <div class="mb-3">
                                                         <label for="title" class="form-label">Title</label>
-                                                        <input type="text" class="form-control" id="title" name="title" required>
+                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title here" data-sb-validations="required" required/>
                                                     </div>
                                                     <hr>
                                                     <div class="mb-3">
                                                         <label for="content" class="form-label">Content</label>
-                                                        <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                                                        <textarea class="form-control" id="content" name="content" rows="3" placeholder="Leave a comment here" data-sb-validations="required" required></textarea>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input class="form-control" id="email" type="email" name="email" placeholder="name@example.com" data-sb-validations="required,email"/>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-outline-dark">Submit</button>
+                                                <button type="submit" class="btn btn-outline-dark px-4">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -77,21 +81,29 @@
                                                 <hr>
                                                 <div class="card rounded-4 p-3">
                                                 <li>
-                                                    <div class="bg-light p-2 rounded-3"><strong>{{ board.title }}</strong></div>
-                                                    <a>{{ board.content }}</a><br>
-                                                    <small class="text-muted">Posted on {{ board.created_at }}</small>
+                                                    <div class="bg-light p-2 rounded-3 w-90"><strong>{{ board.title }}</strong></div>
+                                                    <a>{{ board.content|linebreaksbr }}</a><br>
+                                                    <small class="text-muted">{{ board.email }} || Posted on {{ board.created_at }}</small>
+                                                    <div class="starA"><i class="bi bi-star"></i></div>
                                                 </li>
                                                 </div>
                                             {% empty %}
                                                 <li>게시글이 없습니다.</li>
                                             {% endfor %}
                                         </ul>
+                                        <div class="card-body mb-2">
+                                            <div class="row gx-5">
+                                                <div class="wrapper">
+                                                    <i id="left" class="bi bi-caret-left"></i>
+                                                    <div></div>
+                                                    <i id="right" class="bi bi-caret-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
                 </div>
             </section>
         </main>

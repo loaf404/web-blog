@@ -11,38 +11,17 @@ let scrollDiff = 0;
 const toggleArrowIcons = () => {
   setTimeout(() => {
     const maxScroll = Math.round(carousel.scrollWidth - carousel.clientWidth);
-    arrowIcons[0].style.display = carousel.scrollLeft <= 200 ? "none" : "block";
+    arrowIcons[0].style.display = carousel.scrollLeft <= 0 ? "none" : "block";
     arrowIcons[1].style.display = Math.round(carousel.scrollLeft) >= maxScroll ? "none" : "block";
-  }, 200);
+  }, 100);
 };
 // Helper function to smoothly scroll the carousel
 const scrollCarousel = (direction) => {
-  const cardWidth = firstImage.clientWidth + 16.8; // 이미지 너비 + 여백
+  const cardWidth = firstImage.clientWidth + 16.8; // Image width + margin
   const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-  const targetScroll = direction === "right"
-    ? Math.min(carousel.scrollLeft + cardWidth, maxScroll)
-    : Math.max(carousel.scrollLeft - cardWidth, 0);
-  smoothScroll(targetScroll); // 부드러운 스크롤 호출
+  const scrollAmount = direction === "right" ? cardWidth : -cardWidth;
+  carousel.scrollLeft = Math.min(Math.max(carousel.scrollLeft + scrollAmount, 0), maxScroll);
   toggleArrowIcons();
-};
-const smoothScroll = (targetScroll) => {
-  const startScroll = carousel.scrollLeft;
-  const distance = targetScroll - startScroll;
-  const duration = 150; // 밀리초
-  let startTime = null;
-
-  const animation = (currentTime) => {
-    if (!startTime) startTime = currentTime;
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1); // 0에서 1 사이의 값
-    carousel.scrollLeft = startScroll + distance * progress;
-
-    if (progress < 1) {
-      requestAnimationFrame(animation);
-    }
-  };
-
-  requestAnimationFrame(animation);
 };
 // Event listeners for arrows
 arrowIcons.forEach((icon) => {
